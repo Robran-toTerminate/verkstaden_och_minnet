@@ -1,4 +1,9 @@
-tal_1 = input("Ange det första talet: ")
-tal_2 = input("Ange det andra talet: ")
+tal_1 = float(input("Ange det första talet: ")) 
+tal_2 = float(input("Ange det andra talet: "))
 
-resultat
+#Bytte från int till float för att hantera decimaltal
+
+print(f"Summa: {tal_1 + tal_2}")
+print(f"Differans: {tal_1 - tal_2}")
+print(f"Produkt: {tal_1 * tal_2}")
+print(f"Kvot: {tal_1/tal_2}")  
