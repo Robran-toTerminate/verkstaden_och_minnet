@@ -9,7 +9,12 @@ print("Vilket tal mellan 0 och 10 tänker datorn på?")
 
 tries = 0
 while tries < MAX_TRIES:
-    gissning = int(input("Vad gissar du? "))
+    while True:
+        try:
+            gissning = int(input("Vad gissar du? "))
+            break
+        except ValueError:
+            print("Använd nummer i din gissning.")
 
     if gissning == target_number:
         print("Rätt!")
