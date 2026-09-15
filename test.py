@@ -2,7 +2,7 @@ import pygame
 
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((1000,1000), flags=pygame.SCALED, vsync=1)
+screen = pygame.display.set_mode((1000,400), flags=pygame.SCALED, vsync=1)
 clock = pygame.time.Clock()
 running = True
 
@@ -13,7 +13,11 @@ imgX = 10
 imgY = 10
 imgXV = 10
 imgYV = 10
+imgW = img.width
 
+scale_factor = -5
+
+imgH = 160
 
 
 while running:
@@ -26,23 +30,32 @@ while running:
             color = 'green'
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.pos[0] > imgX and event.pos[0] < imgX + img.width:
-                if event.pos[1] > imgY and event.pos[1] < imgY + img.height:
+            if event.pos[0] > imgX and event.pos[0] < imgX + imgW:
+                if event.pos[1] > imgY and event.pos[1] < imgY + imgH:
                     color = 'blue'
 
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill(color)
 
-    if imgX+img.width > screen.width or imgX < 0:
+    if imgX+imgW > screen.width or imgX < 0:
         imgXV *= -1
-    if imgY+img.height > screen.height or imgY < 0:
+    if imgY+imgH > screen.height or imgY < 0:
         imgYV *= -1
 
     imgX += imgXV
     imgY += imgYV
+    imgW += scale_factor
 
-    screen.blit(img,(imgX,imgY))
+    if imgW < 20:
+        img = pygame.transform.flip(img, True, False)
+        scale_factor *= -1
+    elif imgW > screen.width-200:
+        scale_factor *= -1
+    else:
+        screen.blit(pygame.transform.scale(img, (imgW, imgH)), (imgX,imgY))
+
+
 
     # RENDER YOUR GAME HERE
 
